@@ -5,5 +5,5 @@ function firstImage(noiDung) {
 	if(results) image = results[1];
 	return image;
 }
-
 module.exports = firstImage;
+

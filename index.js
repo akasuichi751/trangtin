@@ -9,7 +9,7 @@ var authRouter = require('./routers/auth');
 var chudeRouter = require('./routers/chude');
 var taikhoanRouter = require('./routers/taikhoan');
 var baivietRouter = require('./routers/baiviet');
-
+var LopHocRouter = require('./routers/lophoc');
 var uri = 'mongodb+srv://didpm215430:admin123@cluster0.gb7zkdd.mongodb.net/';
 mongoose.connect(uri).catch(err => console.log(err));
 
@@ -54,7 +54,7 @@ app.use('/', authRouter);
 app.use('/chude', chudeRouter);
 app.use('/taikhoan', taikhoanRouter);
 app.use('/baiviet', baivietRouter);
-
+app.use('/LopHoc',LopHocRouter);
 app.listen(3000, () => {
 	console.log('Server is running at http://127.0.0.1:3000');
 });

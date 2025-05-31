@@ -1,14 +1,13 @@
 <nav class="navbar navbar-expand-lg bg-info">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="/"><i class="bi bi-star"></i> iNews</a>
+		<a class="navbar-brand" href="/"><i class="bi bi-check2-square"></i> Điểm danh SV</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false">
 			<span class="navbar-toggler-icon"></span>
 		</button>
+		
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<a class="nav-link active" href="/tinmoi"><i class="bi bi-compass"></i> Tin mới nhất</a>
-				</li>
+
 				<% if(typeof session === "undefined" || !session.MaNguoiDung) { %>
 					<li class="nav-item">
 						<a class="nav-link" href="/dangky"><i class="bi bi-person-plus-fill"></i> Đăng ký</a>
@@ -17,41 +16,62 @@
 						<a class="nav-link" href="/dangnhap"><i class="bi bi-box-arrow-in-right"></i> Đăng nhập</a>
 					</li>
 				<% } else { %>
-					<% if(session.QuyenHan == "admin") { %>
+					
+					<% if(session.QuyenHan === "user") { %>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="bi bi-gear"></i> Quản lý
+								<i class="bi bi-gear-fill"></i> Quản lý
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="/chude"><i class="bi bi-card-checklist"></i> Chủ đề</a></li>
-								<li><a class="dropdown-item" href="/taikhoan"><i class="bi bi-people"></i> Tài khoản</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="/baiviet"><i class="bi bi-file-earmark-richtext"></i> Bài viết</a></li>
+								<li><a class="dropdown-item" href="/LopHoc"><i class="bi bi-building"></i> Quản lý lớp học</a></li>
+								<li><a class="dropdown-item" href="/sinhvien"><i class="bi bi-person-lines-fill"></i> Quản lý sinh viên</a></li>
+								<li><a class="dropdown-item" href="/giaovien"><i class="bi bi-person-workspace"></i> Quản lý giảng viên</a></li>
+								<li><a class="dropdown-item" href="/diemdanh"><i class="bi bi-calendar-check"></i> Quản lý điểm danh</a></li>
 							</ul>
 						</li>
 					<% } %>
-					
+
+					<% if(session.QuyenHan === "giaovien") { %>
+						<li class="nav-item">
+							<a class="nav-link" href="/lopcuatoi"><i class="bi bi-journal-richtext"></i> Lớp của tôi</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/diemdanh"><i class="bi bi-calendar-check-fill"></i> Điểm danh</a>
+						</li>
+					<% } %>
+
+					<% if(session.QuyenHan === "sinhvien") { %>
+						<li class="nav-item">
+							<a class="nav-link" href="/lichdiemdanh"><i class="bi bi-calendar-event"></i> Lịch điểm danh</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/trangthai"><i class="bi bi-clipboard-check"></i> Trạng thái điểm danh</a>
+						</li>
+					<% } %>
+
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<i class="bi bi-person"></i> <%= session.HoVaTen %>
+							<i class="bi bi-person-circle"></i> <%= session.HoVaTen %>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="/baiviet/them"><i class="bi bi-file-earmark-plus"></i> Đăng bài viết</a></li>
-							<li><a class="dropdown-item" href="/baiviet/cuatoi"><i class="bi bi-journal-bookmark"></i> Bài viết của tôi</a></li>
-							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="/taikhoan/hoso"><i class="bi bi-person-badge"></i> Hồ sơ cá nhân</a></li>
+							<li><a class="dropdown-item" href="/doimatkhau"><i class="bi bi-key-fill"></i> Đổi mật khẩu</a></li>
 						</ul>
 					</li>
-					
+
 					<li class="nav-item">
 						<a class="nav-link" href="/dangxuat"><i class="bi bi-box-arrow-right"></i> Đăng xuất</a>
 					</li>
+
 				<% } %>
 			</ul>
+
+			<% if(session && session.QuyenHan !== "sinhvien") { %>
 			<form action="/timkiem" class="d-flex" role="search">
-				<input class="form-control me-2" type="search" name="tukhoa" placeholder="Bạn muốn tìm gì?" />
-				<button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+				<input class="form-control me-2" type="search" name="tukhoa" placeholder="Tìm sinh viên, lớp học..." />
+				<button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
 			</form>
+			<% } %>
 		</div>
 	</div>
 </nav>

@@ -3,6 +3,7 @@ var router = express.Router();
 var firstImage = require('../modules/firstimage');
 var ChuDe = require('../models/chude');
 var BaiViet = require('../models/baiviet');
+var LopHoc = require('../models/LopHoc');
 
 // GET: Trang chủ
 // GET: Trang chủ
@@ -129,6 +130,7 @@ router.post('/timkiem', async (req, res) => {
 	});
 });
 
+
 // GET: Lỗi
 router.get('/error', async (req, res) => {
 	res.render('error', {
@@ -144,3 +146,9 @@ router.get('/success', async (req, res) => {
 });
 
 module.exports = router;
+
+
+
+
+
+
